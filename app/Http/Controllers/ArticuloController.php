@@ -29,7 +29,7 @@ class ArticuloController extends Controller
     		->join('categoria as c', 'a.idcategoria', '=', 'c.idcategoria')
     		->select('a.idarticulo', 'a.nombre', 'a.codigo', 'a.stock', 'c.nombre as categoria', 'a.descripcion', 'a.imagen', 'a.estado')
     		->orwhere('a.nombre','LIKE','%'.$query.'%')
-    		->orwhere('a.codigocd','LIKE','%'.$query.'%')
+    		->orwhere('a.codigo','LIKE','%'.$query.'%')
     		->orderBy('a.idarticulo','desc')
     		->paginate(7);
 
@@ -73,8 +73,8 @@ class ArticuloController extends Controller
     public function edit($id)
     {
     	$articulo=Articulo::findOrFail($id);
-    	$categorias=DB::table('categoria')->where('condicion','=','1');
-    	return view('almacen.articulo.edit', ['articulo'=>$articulo, 'categorias'=>$caegorias]);
+    	$categorias=DB::table('categoria')->where('condicion','=','1')->get();;
+    	return view('almacen.articulo.edit', ['articulo'=>$articulo, 'categorias'=>$categorias]);
     }
 
     public function update(ArticuloFormRequest $request, $id)
