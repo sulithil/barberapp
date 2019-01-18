@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+Route::resource('almacen/categoria', 'CategoriaController');
+Route::resource('almacen/articulo', 'ArticuloController');
